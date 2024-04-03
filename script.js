@@ -1,8 +1,11 @@
 const PLAYFIELD_COLUMNS = 10;
 const PLAYFIELD_ROWS = 20;
 const btnRestart = document.querySelector(".btn-restart");
+const btnPlay = document.querySelector(".btn-play");
+const btnRestartIfLost = document.querySelector(".btn-restart-lost");
 const scoreElement = document.querySelector(".score");
 const overley = document.querySelector(".overlay");
+const startGame = document.querySelector(".start-game");
 let isGameOver = false;
 let timedId = null;
 let isPaused = false;
@@ -49,7 +52,8 @@ const TETROMINOES = {
 };
 
 let cells;
-init();
+
+generatePlayField();
 
 function init() {
   isGameOver = false;
@@ -387,8 +391,19 @@ function hasCollisions(row, column) {
   );
 }
 
-btnRestart.addEventListener("click", function () {
+btnPlay.addEventListener("click", function(){
+  document.querySelector(".grid").innerHTML = "";
+  startGame.style.display = "none";
+  init();
+});
+
+btnRestartIfLost.addEventListener("click", function () {
   document.querySelector(".grid").innerHTML = "";
   overley.style.display = "none";
+  init();
+});
+
+btnRestart.addEventListener("click", function () {
+  document.querySelector(".grid").innerHTML = "";
   init();
 });
