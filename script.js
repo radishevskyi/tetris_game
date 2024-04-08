@@ -110,7 +110,6 @@ function generateTetromino() {
   const column = PLAYFIELD_COLUMNS / 2 - Math.floor(matrix.length / 2);
   const rowTetro = -2;
 
-  // console.log(matrix);
   tetromino = {
     name,
     matrix,
@@ -165,14 +164,10 @@ function findFilledRows() {
         filledColumns++;
       }
     }
-    // for 2
     if (PLAYFIELD_COLUMNS === filledColumns) {
       fillRows.push(row);
     }
-    // if
   }
-  // for 1
-
   return fillRows;
 }
 
@@ -183,7 +178,6 @@ function drawPlayField() {
 
       const name = playfield[row][column];
       const cellIndex = convertPositionToIndex(row, column);
-      // console.log(cellIndex);
       cells[cellIndex].classList.add(name);
     }
   }
@@ -195,29 +189,16 @@ function drawTetromino() {
 
   for (let row = 0; row < tetrominoMatrixSize; row++) {
     for (let column = 0; column < tetrominoMatrixSize; column++) {
-      // Щоб подивитись результат алгоритму з функції rotateMatrix()!!!!!
-
-      // const cellIndex = convertPositionToIndex(
-      //     tetromino.row + row,
-      //     tetromino.column + column
-      // );
-      // cells[cellIndex].innerHTML = showRotated[row][column];
-      // -----------------------
       if (isOutsideOfTopboard(row)) continue;
       if (!tetromino.matrix[row][column]) continue;
       const cellIndex = convertPositionToIndex(
         tetromino.row + row,
         tetromino.column + column
       );
-      // console.log(cellIndex);
       cells[cellIndex].classList.add(name);
     }
-    // column
   }
-  // row
 }
-// drawTetromino();
-// drawPlayField();
 
 function draw() {
   cells.forEach((cell) => cell.removeAttribute("class"));
@@ -228,19 +209,11 @@ function draw() {
 function rotateTetromino() {
   const oldMatrix = tetromino.matrix;
   const rotatedMatrix = rotateMatrix(tetromino.matrix);
-  // showRotated = rotateMatrix(showRotated);
   tetromino.matrix = rotatedMatrix;
   if (!isValid()) {
     tetromino.matrix = oldMatrix;
   }
 }
-
-// let showRotated = [
-//     [1,2,3],
-//     [4,5,6],
-//     [7,8,9]
-// ]
-// draw();
 
 function rotate() {
   rotateTetromino();
@@ -358,7 +331,6 @@ function isValid() {
   const matrixSize = tetromino.matrix.length;
   for (let row = 0; row < matrixSize; row++) {
     for (let column = 0; column < matrixSize; column++) {
-      // if(tetromino.matrix[row][column]) continue;
       if (isOutsideOfGameboard(row, column)) {
         return false;
       }
